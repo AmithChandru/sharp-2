@@ -25,6 +25,7 @@
         <h2 class="title">Add Items</h2>
         <form id="addForm" class="form-inline mb-3">
           <input type="text" class="form-control mr-2" id="item">
+          <input type="text" class="form-control mr-2" id="description">
           <input type="submit" class="btn btn-dark" value="Submit">
         </form>
         <h2 class="title">Items</h2>
@@ -40,14 +41,17 @@
 <script>
     var form = document.getElementById('addForm');
     var itemList = document.getElementById('items');
+    var filter = document.getElementById('filter');
     form.addEventListener('submit', addItem);
     itemList.addEventListener('click', removeItem);
+    filter.addEventListener('keyup', filterItems);
     function addItem(e){
         e.preventDefault();
         var newItem = document.getElementById('item').value;
+        var newDesc = document.getElementById('description').value;
         var li = document.createElement('li');
         li.className = 'list-group-item';
-        li.appendChild(document.createTextNode(newItem));
+        li.appendChild(document.createTextNode(newItem + ' ' + newDesc));
         var deleteBtn = document.createElement('button');
         deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
         deleteBtn.appendChild(document.createTextNode('X'));
@@ -65,6 +69,18 @@
                 itemList.removeChild(li);
             }
         }
+    }
+    function filterItems(e) {
+        let input = e.target.value.toLowerCase();
+        let items = itemList.getElementsByTagName('li');
+        Array.from(items).forEach(function(ele) {
+            let name = ele.firstChild.textContent;
+            if (name.toLowerCase().indexOf(input) != -1) {
+                ele.style.display = 'block';
+            } else {
+                ele.style.display = 'none';
+            }
+        })
     }
 </script>
 </html>
