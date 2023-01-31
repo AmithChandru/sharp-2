@@ -29,10 +29,10 @@
         </form>
         <h2 class="title">Items</h2>
         <ul id="items" class="list-group">
-          <li class="list-group-item">Amith<button class="btn btn-danger btn-sm float-right delete">X</button></li>
-          <li class="list-group-item">Karthik<button class="btn btn-danger btn-sm float-right delete">X</button></li>
-          <li class="list-group-item">Samarth<button class="btn btn-danger btn-sm float-right delete">X</button></li>
-          <li class="list-group-item">Achinth<button class="btn btn-danger btn-sm float-right delete">X</button></li>
+          <li class="list-group-item">Amith<button class="btn ml-2 btn-sm float-right edit">Edit</button><button class="btn btn-danger btn-sm float-right delete">X</button></li>
+          <li class="list-group-item">Karthik<button class="btn ml-2 btn-sm float-right edit">Edit</button><button class="btn btn-danger btn-sm float-right delete">X</button></li>
+          <li class="list-group-item">Samarth<button class="btn ml-2 btn-sm float-right edit">Edit</button><button class="btn btn-danger btn-sm float-right delete">X</button></li>
+          <li class="list-group-item">Achinth<button class="btn ml-2 btn-sm float-right edit">Edit</button><button class="btn btn-danger btn-sm float-right delete">X</button></li>
         </ul>
        </div>
       </div>
@@ -49,8 +49,12 @@
         li.className = 'list-group-item';
         li.appendChild(document.createTextNode(newItem));
         var deleteBtn = document.createElement('button');
+        var editBtn = document.createElement('button');
         deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+        editBtn.className = 'btn ml-2 btn-sm float-right edit';
         deleteBtn.appendChild(document.createTextNode('X'));
+        editBtn.appendChild(document.createTextNode('Edit'));
+        li.appendChild(editBtn);
         li.appendChild(deleteBtn);
         itemList.appendChild(li);
         let arr = document.querySelectorAll('.list-group-item');
@@ -66,6 +70,13 @@
                 var li = e.target.parentElement;
                 itemList.removeChild(li);
             }
+        }
+        if (e.target.classList.contains('edit')) {
+            var li = e.target.parentElement;
+            itemList.removeChild(li);
+            window.localStorage.removeItem(e.target.parentElement.firstChild.textContent);
+            let inp = document.getElementById('item');
+            inp.value = e.target.parentElement.firstChild.textContent;
         }
     }
 </script>
