@@ -31,13 +31,13 @@
     </section>
     
     <script>
-        let form = document.getElementById('my-form');
-        form.addEventListener('submit', onSubmit);
-        function onSubmit(e) {
-            e.preventDefault();
-            window.localStorage.setItem('name', e.target[0].value);
-            window.localStorage.setItem('email', e.target[1].value);
-        }
+        let obj = {
+            name: 'Amith',
+            age: '22'
+        };
+        let obj_stringified = JSON.stringify(obj);
+        window.localStorage.setItem('data', obj_stringified);
+        console.log(window.localStorage.getItem('data'));
     </script>
   </body>
 </html>
